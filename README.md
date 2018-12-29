@@ -2,6 +2,10 @@
 
 **Tags Drive** is an open source standalone cloud drive. The main feature of **Tags Drive** is that files have flat structure (there's no folders). Instead, every file has a tag (or tags).
 
+## Wiki
+
+There's a [wiki document](WIKI.md).
+
 ## Why should I prefer Tags Drive to other cloud drives
 
 For example, you want to save an image of a cat. You can save it into folder `cats` or into folder `cute`. Of course, you may keeps 2 equal files, but it would be better to use tags system. So, you just need to add tags `cats` and `cute` to the photo.
@@ -42,15 +46,16 @@ DBG=false
 
 **Environment variables:**
 
-| Variable    | Default | Description                                               |
-| ----------- | ------- | --------------------------------------------------------- |
-| PORT        | 80      | Port for website                                          |
-| TLS         | true    | Should **Tags Drive** use https                           |
-| LOGIN       | user    | Login                                                     |
-| PSWRD       | qwerty  | Password                                                  |
-| ENCRYPT     | false   | Should the **Tags Drive** encrypt uploaded files          |
-| DBG         | false   |                                                           |
-| SKIP_LOGIN  | false   | Let use **Tags Drive** without auth (only for debug) |
+| Variable    | Default | Description                                                              |
+| ----------- | ------- | ------------------------------------------------------------------------ |
+| PORT        | 80      | Port for website                                                         |
+| TLS         | true    | Should **Tags Drive** use https                                          |
+| LOGIN       | user    | Login                                                                    |
+| PSWRD       | qwerty  | Password                                                                 |
+| ENCRYPT     | false   | Should the **Tags Drive** encrypt uploaded files                         |
+| DBG         | false   |                                                                          |
+| SKIP_LOGIN  | false   | Let use **Tags Drive** without auth (only for debug)                     |
+| PASS_PHRASE | ""      | Passphrase is used to encrypt files. It can't be empty if `ENCRYPT=true` |
 
 ## Infrastructure
 
