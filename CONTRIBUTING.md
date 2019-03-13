@@ -9,6 +9,7 @@ Tags-Drive uses [GitHub flow](https://help.github.com/articles/github-flow/)
 ## Commit prefixes
 
 - `[WIP]` - Work in progress.
+- `[UPD]` - Update of existing functionality
 - `[FIX]` - Bug fixes
 - `[FEAT]` - New feature
 - `[REF]` - Code refactoring
