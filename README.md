@@ -1,14 +1,14 @@
 # Tags Drive
 
-**Tags Drive** is an open source standalone cloud drive. The main feature of **Tags Drive** is that files have flat structure (there's no folders). Instead, every file has a tag (or tags).
+**Tags Drive** is an open source standalone cloud drive. The main feature of **Tags Drive** is no folders. Instead, every file has a tag (or tags).
 
 ## Wiki
 
 There's a [wiki document](WIKI.md).
 
-## Why should I prefer Tags Drive to other cloud drives
+## Why I should prefer Tags Drive to other cloud drives
 
-For example, you want to save an image of a cat. You can save it into folder `cats` or into folder `cute`. Of course, you may keeps 2 equal files, but it would be better to use tags system. So, you just need to add tags `cats` and `cute` to the photo.
+For example, you want to save an image of a cat. You can save it into folder `cats` or into folder `cute`. Of course, you may keeps 2 equal files, but it would be better to use tags system. So, you just should to add tags `cat` and `cute` to the photo.
 
 ## Installing
 
@@ -16,21 +16,21 @@ For example, you want to save an image of a cat. You can save it into folder `ca
 
 - Docker
 
-Run `docker pull kirtis/tags-drive`. Create `run.sh` to run docker container.
+Run `docker pull kirtis/tags-drive`. Create folder `tags-drive` and several sub-folders: `configs`, `data`, `ssl` (you you want to use HTTPS). CD to this folder.
 
-Example:
+Create `run.sh` to run docker container. Example:
 
 ```sh
-#!bin/sh
-# Example of run.sh script
+#!bin/bash
+
 docker run --rm -d \
---name tags-drive \
--p 80:80 \
--v /home/username/configs:/app/configs \
--v /home/username/data:/app/data \
--v /home/username/ssl:/app/ssl \
---env-file /home/username/tags-drive.env \
-kirtis/tags-drive:latest
+  --name tags-drive \
+  -p 80:80 \
+  -v $PWD/configs:/app/configs \
+  -v $PWD/data:/app/data \
+  -v $PWD/ssl:/app/ssl \
+  --env-file $PWD/tags-drive.env \
+  kirtis/tags-drive:latest
 ```
 
 Example of `tags-drive.env`:
@@ -46,16 +46,7 @@ DBG=false
 
 **Environment variables:**
 
-| Variable    | Default | Description                                                              |
-| ----------- | ------- | ------------------------------------------------------------------------ |
-| PORT        | 80      | Port for website                                                         |
-| TLS         | true    | Should **Tags Drive** use https                                          |
-| LOGIN       | user    | Login                                                                    |
-| PSWRD       | qwerty  | Password                                                                 |
-| ENCRYPT     | false   | Should the **Tags Drive** encrypt uploaded files                         |
-| DBG         | false   |                                                                          |
-| SKIP_LOGIN  | false   | Let use **Tags Drive** without auth (only for debug)                     |
-| PASS_PHRASE | ""      | Passphrase is used to encrypt files. It can't be empty if `ENCRYPT=true` |
+[List of env variables](https://github.com/tags-drive/core#environment-variables)
 
 ## Infrastructure
 
