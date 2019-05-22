@@ -2,6 +2,12 @@
 
 **Tags Drive** is an open source standalone cloud drive. The main feature of **Tags Drive** is no folders. Instead, every file can have a tag (or tags).
 
+## Version
+
+The latest version of [backend](https://github.com/tags-drive/core) ![GitHub release](https://img.shields.io/github/release/tags-drive/core.svg)
+
+The latest version of [frontend](https://github.com/tags-drive/web) ![GitHub release](https://img.shields.io/github/release/tags-drive/web.svg)
+
 ## Wiki
 
 There's a [wiki document](WIKI.md).
