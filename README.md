@@ -10,7 +10,7 @@ The latest version of [frontend](https://github.com/tags-drive/web) ![GitHub rel
 
 ## Wiki
 
-There's a [wiki document](WIKI.md).
+There's a [Wiki](WIKI.md) for **Tags Drive**.
 
 ## Why I should prefer Tags Drive to other cloud drives
 
@@ -24,18 +24,17 @@ For example, you want to save an image of a cat. You can save it into folder `ca
 
 **Setup:**
 
-Run `docker pull kirtis/tags-drive`. Create folder `tags-drive` and several sub-folders: `configs`, `data`, `ssl` (if you want to use HTTPS). CD to this folder.
+Run `docker pull kirtis/tags-drive:latest`. Create folder `tags-drive` and several sub-folders: `var`, `var/data`, `ssl` (if you want to use HTTPS). CD to this folder.
 
 Create `run.sh` to run a docker container. Example:
 
 ```sh
-#!bin/bash
+#!/bin/bash
 
 docker run --rm -d \
   --name tags-drive \
   -p 80:80 \
-  -v $PWD/configs:/app/configs \
-  -v $PWD/data:/app/data \
+  -v $PWD/var:/app/var \
   -v $PWD/ssl:/app/ssl \
   --env-file $PWD/tags-drive.env \
   kirtis/tags-drive:latest
@@ -44,12 +43,10 @@ docker run --rm -d \
 Example of `tags-drive.env`:
 
 ```bash
-PORT=80
 TLS=true
 LOGIN=user
 PSWRD=qwerty
-ENCRYPT=false
-DBG=false
+ENCRYPT=true
 ```
 
 **Environment variables:**
