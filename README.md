@@ -8,6 +8,15 @@
 ![GitHub release](https://img.shields.io/github/release/tags-drive/web.svg?style=flat-square&label=Frontend%20version)
 ![GitHub release](https://img.shields.io/github/tag-pre/tags-drive/web.svg?style=flat-square&label=Frontend%20beta-version)
 
+---
+
+- [Wiki](#Wiki)
+- [Why I should prefer Tags Drive to other cloud drives](#Why-I-should-prefer-Tags-Drive-to-other-cloud-drives)
+- [Installation](#Installation)
+  - [Requirements](#Requirements)
+  - [Running](#Running)
+- [Infrastructure](#Infrastructure)
+
 ## Wiki
 
 There's a [Wiki](WIKI.md) for **Tags Drive**.
