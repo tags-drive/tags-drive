@@ -16,42 +16,60 @@ There's a [Wiki](WIKI.md) for **Tags Drive**.
 
 For example, you want to save an image of a cat. You can save it into folder `cats` or into folder `cute`. Of course, you may keep 2 equal files, but it would be better to use the tags system. So, you just should to add tags `cat` and `cute` to the photo.
 
-## Installing
+## Installation
 
-**Requirements:**
+### Requirements
 
 - Docker
 
-**Setup:**
+### Running
 
-Run `docker pull kirtis/tags-drive:latest`. Create folder `tags-drive` and several sub-folders: `var`, `var/data`, `ssl` (if you want to use HTTPS). CD to this folder.
+1. Pull the latest release from [Docker Hub](https://hub.docker.com/)
 
-Create `run.sh` to run a docker container. Example:
+    `docker pull kirtis/tags-drive:latest`
 
-```sh
-#!/bin/bash
+1. Prepare folders
 
-docker run --rm -d \
-  --name tags-drive \
-  -p 80:80 \
-  -v $PWD/var:/app/var \
-  -v $PWD/ssl:/app/ssl \
-  --env-file $PWD/tags-drive.env \
-  kirtis/tags-drive:latest
-```
+    Create a folder `tags-drive` and several sub-folders:
 
-Example of `tags-drive.env`:
+    - `var`
+    - `var/data`
+    - `ssl` (if you want to use HTTPS)
 
-```bash
-TLS=true
-LOGIN=user
-PSWRD=qwerty
-ENCRYPT=true
-```
+    CD to `tags-drive` folder.
 
-**Environment variables:**
+1. Create an env file and a script to run a docker container
 
-[List of all env variables](https://github.com/tags-drive/core#environment-variables)
+    **Env file** – `tags-drive.env`
+
+    ```bash
+    TLS=true
+    LOGIN=user
+    PSWRD=qwerty
+    ENCRYPT=true
+    ```
+
+    [List of all env variables](https://github.com/tags-drive/core#environment-variables)
+
+    **Script** – `run.sh`
+
+    ```sh
+    #!/bin/bash
+
+    docker run --rm -d \
+      --name tags-drive \
+      -p 80:80 \
+      -v $PWD/var:/app/var \
+      -v $PWD/ssl:/app/ssl \
+      --env-file $PWD/tags-drive.env \
+      kirtis/tags-drive:latest
+    ```
+
+1. Generate a self-signed TLS certificate (optional)
+
+    `openssl req -x509 -nodes -newkey rsa:2048 -sha256 -keyout ./ssl/key.key -out ./ssl/cert.cert`
+
+1. Run `run.sh` script
 
 ## Infrastructure
 
