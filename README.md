@@ -10,21 +10,21 @@
 
 ---
 
-- [Why I should prefer Tags Drive to other cloud drives](#Why-I-should-prefer-Tags-Drive-to-other-cloud-drives)
-- [Installation](#Installation)
-  - [Requirements](#Requirements)
-  - [Running](#Running)
-- [FAQ](#FAQ)
-  - [What is the View Mode](#What-is-the-View-Mode)
-  - [How to upload new files](#How-to-upload-new-files)
-  - [How to preview files](#How-to-preview-files)
-  - [How to search files](#How-to-search-files)
-  - [How to select multiple files](#How-to-select-multiple-files)
-  - [How to manage files](#How-to-manage-files)
-  - [Can I share files](#Can-I-share-files)
-  - [Trash](#Trash)
-  - [Other](#Other)
-- [Infrastructure](#Infrastructure)
+- [Why I should prefer Tags Drive to other cloud drives](#why-i-should-prefer-tags-drive-to-other-cloud-drives)
+- [Installation](#installation)
+  - [Requirements](#requirements)
+  - [Running](#running)
+- [FAQ](#faq)
+  - [What is the View Mode](#what-is-the-view-mode)
+  - [How to upload new files](#how-to-upload-new-files)
+  - [How to preview files](#how-to-preview-files)
+  - [How to search files](#how-to-search-files)
+  - [How to select multiple files](#how-to-select-multiple-files)
+  - [How to manage files](#how-to-manage-files)
+  - [Can I share files](#can-i-share-files)
+  - [Trash](#trash)
+  - [Other](#other)
+- [Infrastructure](#infrastructure)
 
 ## Why I should prefer Tags Drive to other cloud drives
 
@@ -47,7 +47,6 @@ For example, you want to save an image of a cat. You can save it into folder `ca
     Create a folder `tags-drive` and several sub-folders:
 
     - `var`
-    - `var/data`
     - `ssl` (if you want to use HTTPS)
 
     CD to `tags-drive` folder.
@@ -57,10 +56,10 @@ For example, you want to save an image of a cat. You can save it into folder `ca
     **Env file** – `tags-drive.env`
 
     ```bash
-    TLS=true
-    LOGIN=user
-    PSWRD=qwerty
-    ENCRYPT=true
+    WEB_LOGIN=user
+    WEB_PASSWORD=qwerty
+    WEB_TLS=true
+    STORAGE_ENCRYPT=true
     ```
 
     [List of all env variables](https://github.com/tags-drive/core#environment-variables)
