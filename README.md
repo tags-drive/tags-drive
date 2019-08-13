@@ -176,4 +176,3 @@ There are several repositories:
 
 - [tags-drive/core](https://github.com/tags-drive/core) - contains backend part (written in **Go**)
 - [tags-drive/web](https://github.com/tags-drive/web) - contains web part (written in **Vue.js** and **TypeScript**)
-- [tags-drive/scripts](https://github.com/tags-drive/scripts) - contains scripts for the deployment
