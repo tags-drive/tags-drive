@@ -14,6 +14,7 @@
 - [Installation](#installation)
   - [Requirements](#requirements)
   - [Running](#running)
+  - [Proxy example](#proxy-example)
 - [FAQ](#faq)
   - [What is the View Mode](#what-is-the-view-mode)
   - [How to upload new files](#how-to-upload-new-files)
@@ -83,6 +84,33 @@ For example, you want to save an image of a cat. You can save it into folder `ca
     `openssl req -x509 -nodes -newkey rsa:2048 -sha256 -keyout ./ssl/key.key -out ./ssl/cert.cert`
 
 1. Run `run.sh` script
+
+### Proxy example
+
+You can use [Caddy](https://github.com/caddyserver/caddy) to proxy requests to **Tags Drive**.
+
+1. Replace `-p 80:80` with `-p 127.0.0.1:80:80` to expose **Tags Drive** only to the host
+
+2. Disable TLS (set `WEB_TLS` variable to `false`)
+
+3. Create **Caddyfile**
+
+    ```caddy
+    tags-drive.example.com {
+      proxy / localhost:80 {
+        transparent
+      }
+
+      gzip
+
+      log logs/tags-drive.example.log {
+        rotate_age 5 # days
+        except /favicon.ico
+      }
+    }
+    ```
+
+4. Run `caddy`
 
 ## FAQ
 
