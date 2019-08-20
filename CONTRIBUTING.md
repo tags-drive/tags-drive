@@ -6,28 +6,30 @@ This file contains common rules for **Tags Drive** repositories.
 
 **Tags Drive** uses [GitHub flow](https://help.github.com/articles/github-flow/)
 
-## Commit prefixes
+### Commit prefix
 
-- `[WIP]` - Work in progress.
+Every commit must have at least one of the next prefixes
+
+- `[FEAT]` - New feature
 - `[UPD]` - Update of existing functionality
 - `[FIX]` - Bug fixe
-- `[FEAT]` - New feature
 - `[REF]` - Code refactoring
 - `[DOC]` - Updates to documentation
+- `[WIP]` - Work in progress.
 
 **Examples:**
 
-- There's an issue #15 - "Update API". Branch `api-updating` should contain following commits:
+- There's an issue **#15** - "Update API". Branch `update-api` can contain following commits:
 
   - `[WIP] update GET /api/test`
   - `[WIP] update GET /api/test/file`
-  - `[DOC] update README.md`
+  - `[WIP] [DOC] update README.md`
 
-  Merge commit should have message `[UPD] Resolve #15 (Update API)`
+  Merge commit must have message `[UPD] resolve #15 (Update API)`
 
-- There's an issue #16 - "Fix sort order". It can be resolved in one commit. Then commit message must be `[FIX] fix #16 (Fix sort order)`
+- There's an issue **#16** - "Fix sort order". It can be resolved in a single commit. The commit message must be `[FIX] fix #16 (Fix sort order)`
 
-## Atomicity
+### Atomicity
 
 Every change must be atomic. If it can be done with a single commit, a commit message must have prefixes `[UPD]`, `[FIX]`, `[FEAT]` and etc.
 
