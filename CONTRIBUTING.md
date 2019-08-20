@@ -2,6 +2,13 @@
 
 This file contains common rules for **Tags Drive** repositories.
 
+##
+
+- [GitHub Flow](#github-flow)
+  - [Commit prefixes](#commit-prefixes)
+  - [Atomicity](#atomicity)
+- [Release formatting](#release-formatting)
+
 ## GitHub Flow
 
 **Tags Drive** uses [GitHub flow](https://help.github.com/articles/github-flow/)
