@@ -34,3 +34,32 @@ Every commit must have at least one of the next prefixes
 Every change must be atomic. If it can be done with a single commit, a commit message must have prefixes `[UPD]`, `[FIX]`, `[FEAT]` and etc.
 
 If there are a lot of work and a special branch is needed, every commit message must have prefix `[WIP]`. Merge commit message can use prefixes `[UPD]`, `[FIX]`, `[FEAT]` and etc.
+
+## Release formatting
+
+Release notes should contain these Emoji for better readability
+
+| Emoji         | Code            | Definition      |
+| ------------- | --------------- | --------------- |
+| :sparkles:    | `:sparkles:`    | major feature   |
+| :hammer:      | `:hammer:`      | refactoring     |
+| :bug:         | `:bug:`         | fix bug         |
+| :exclamation: | `:exclamation:` | need attention  |
+| :boom:        | `:boom:`        | breaking change |
+
+**Release example:**
+
+> **Features**
+>
+> - :sparkles: major feature – issue #99999
+> - minor feature – PR #99998
+>
+> **Updates**
+>
+> - :hammer: refactor `foo` function – issue #99997
+> - update function comments – commit `1a8d66e`
+>
+> **Fixes**
+>
+> - :bug: fix some small bug – issue #99996
+> - :exclamation: fix security bug – PR #99995
