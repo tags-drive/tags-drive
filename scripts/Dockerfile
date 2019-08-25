@@ -16,10 +16,9 @@ ARG TEST_STORAGE_S3_SECRET_ACCESS_KEY=secret-key
 ARG TEST_STORAGE_S3_SECURE=false
 
 # Prepare S3 storage (minio)
-RUN mkdir /minio && \
-	cd /minio && \
-	wget https://dl.min.io/server/minio/release/linux-amd64/minio && \
-	chmod +x minio
+RUN mkdir /minio
+COPY ./vendor/minio/minio /minio
+RUN chmod +x /minio/minio
 
 # Clone tags-drive/core
 RUN mkdir /build && \
