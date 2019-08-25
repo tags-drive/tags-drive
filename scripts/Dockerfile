@@ -15,20 +15,22 @@ ARG TEST_STORAGE_S3_ACCESS_KEY_ID=access-key
 ARG TEST_STORAGE_S3_SECRET_ACCESS_KEY=secret-key
 ARG TEST_STORAGE_S3_SECURE=false
 
+WORKDIR /build/src
+
 # Prepare S3 storage (minio)
 RUN mkdir /minio
 COPY ./vendor/minio/minio /minio
 RUN chmod +x /minio/minio
 
 # Clone tags-drive/core
-RUN mkdir /build && \
-	git clone --branch $BACKEND_TAG --depth 1 --single-branch https://github.com/tags-drive/core /build
+RUN git clone --branch $BACKEND_TAG --depth 1 --single-branch https://github.com/tags-drive/core /build/src
 
-# Run minio, run tests and build a binary
+# Run minio, run tests
 RUN bash -c "nohup /minio/minio server data --quiet &" && \
-	cd /build && \
-	go test -v -mod=vendor ./... && \
-	go build -o tags-drive -mod=vendor main.go
+	go test -v -mod=vendor ./...
+
+# Build a binary in /build directory
+RUN go build -o ../tags-drive -mod=vendor main.go
 
 
 # Build frontend
@@ -36,12 +38,12 @@ FROM node:12.2.0 as build-frontend
 
 ARG FRONTEND_TAG="master"
 
-RUN mkdir -p /build && \
-	git clone --branch $FRONTEND_TAG --depth 1 --single-branch https://github.com/tags-drive/web /build
+WORKDIR /build
+
+RUN git clone --branch $FRONTEND_TAG --depth 1 --single-branch https://github.com/tags-drive/web /build
 
 # Build into /build/dist
-RUN cd /build && \
-	npm i && \
+RUN npm i && \
 	npm run build
 
 
