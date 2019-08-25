@@ -1,7 +1,11 @@
+# INTERNAL_TAG_REGEXP is a regexp thah mathes semver tags
+ARG INTERNAL_TAG_REGEXP="^v(?:\d+\.){2}\d+(?:-(?:beta|alpha)\.\d+)?$"
+
 # Build backend
 FROM golang:1.12.5 as build-backend
 
 ARG BACKEND_TAG="master"
+ARG BACKEND_VERSION=${BACKEND_TAG}
 # Build env vars
 ARG CGO_ENABLED=0
 ARG GOOS=linux
@@ -14,6 +18,8 @@ ARG TEST_STORAGE_S3_ENDPOINT=127.0.0.1:9000
 ARG TEST_STORAGE_S3_ACCESS_KEY_ID=access-key
 ARG TEST_STORAGE_S3_SECRET_ACCESS_KEY=secret-key
 ARG TEST_STORAGE_S3_SECURE=false
+#
+ARG INTERNAL_TAG_REGEXP
 
 WORKDIR /build/src
 
@@ -29,21 +35,39 @@ RUN git clone --branch $BACKEND_TAG --depth 1 --single-branch https://github.com
 RUN bash -c "nohup /minio/minio server data --quiet &" && \
 	go test -v -mod=vendor ./...
 
-# Build a binary in /build directory
-RUN go build -o ../tags-drive -mod=vendor main.go
+# Change the version to the latest commit hash if BACKEND_VERSION isn't a semver tag.
+# Build a binary in /build directory (must be in the same RUN to correct version setting)
+RUN \
+	if ! echo ${BACKEND_VERSION} | grep -q -P ${INTERNAL_TAG_REGEXP} ; \
+	then \
+	BACKEND_VERSION="$(git log --format="%h" -1)" ; \
+	echo "Use the latest commit hash instead of tag – ${BACKEND_VERSION}" ; \
+	fi && \
+	go build -o ../tags-drive -ldflags="-X main.version=${BACKEND_VERSION}" -mod=vendor main.go
 
 
 # Build frontend
 FROM node:12.2.0 as build-frontend
 
 ARG FRONTEND_TAG="master"
+ARG VUE_APP_VERSION=${FRONTEND_TAG}
+#
+ARG INTERNAL_TAG_REGEXP
 
 WORKDIR /build
 
+# Clone tags-drive/web
 RUN git clone --branch $FRONTEND_TAG --depth 1 --single-branch https://github.com/tags-drive/web /build
 
-# Build into /build/dist
-RUN npm i && \
+# Change the version to the latest commit hash if VUE_APP_VERSION isn't a semver tag
+# Build into /build/dist (must be in the same RUN to correct version setting)
+RUN \
+	if ! echo ${VUE_APP_VERSION} | grep -q -P ${INTERNAL_TAG_REGEXP} ; \
+	then \
+	VUE_APP_VERSION="$(git log --format="%h" -1)" ; \
+	echo "Use the latest commit hash instead of tag – ${VUE_APP_VERSION}" ; \
+	fi && \
+	npm i && \
 	npm run build
 
 
